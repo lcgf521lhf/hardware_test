@@ -1,8 +1,8 @@
-#include <iostream>
-#include <cstdlib>
 #include <chrono>
+#include <cstdlib>
 #include <ctime>
 #include <fstream>
+#include <iostream>
 
 #define Enc_ntt_size 3
 #define Coeff_modulus_size 4
@@ -27,8 +27,8 @@ inline void multiply_uint64(u64 operand1, u64 operand2, u64 *result128)
 
     auto middle1 = operand1 * operand2_coeff_right;
     u64 middle;
-    auto left = operand1 * operand2 +
-                (static_cast<u64>(add_uint64(middle1, operand2 * operand1_coeff_right, &middle)) << 32);
+    auto left =
+        operand1 * operand2 + (static_cast<u64>(add_uint64(middle1, operand2 * operand1_coeff_right, &middle)) << 32);
     auto right = operand1_coeff_right * operand2_coeff_right;
     auto temp_sum = (right >> 32) + (middle & 0x00000000FFFFFFFFULL);
 
@@ -38,7 +38,6 @@ inline void multiply_uint64(u64 operand1, u64 operand2, u64 *result128)
 
 inline void multiply_uint64_hw64(u64 operand1, u64 operand2, u64 *hw64)
 {
-
     auto operand1_coeff_right = operand1 & 0x00000000FFFFFFFFULL;
     auto operand2_coeff_right = operand2 & 0x00000000FFFFFFFFULL;
     operand1 >>= 32;
@@ -46,8 +45,8 @@ inline void multiply_uint64_hw64(u64 operand1, u64 operand2, u64 *hw64)
 
     auto middle1 = operand1 * operand2_coeff_right;
     u64 middle;
-    auto left = operand1 * operand2 +
-                (static_cast<u64>(add_uint64(middle1, operand2 * operand1_coeff_right, &middle)) << 32);
+    auto left =
+        operand1 * operand2 + (static_cast<u64>(add_uint64(middle1, operand2 * operand1_coeff_right, &middle)) << 32);
     auto right = operand1_coeff_right * operand2_coeff_right;
     auto temp_sum = (right >> 32) + (middle & 0x00000000FFFFFFFFULL);
 
